@@ -18,19 +18,19 @@ router.get("/", (req, res) => {
 
 //RETURNS ALL SUMMARY VALUES
 //SHUFFLES THE ORDER OF THE SUMMARY VALUES
-router.get("/summaries", (req, res) => {
-  const mdnData = readFile("./data/mdn.json");
-  if (!mdnData) {
-    res.status(404).json("Nothing found");
-  } else {
-    let sentenceArray = shuffle(
-      mdnData.map((object) => {
-        return object.summary;
-      })
-    );
-    res.status(200).json(sentenceArray);
-  }
-});
+// router.get("/summaries", (req, res) => {
+//   const mdnData = readFile("./data/mdn.json");
+//   if (!mdnData) {
+//     res.status(404).json("Nothing found");
+//   } else {
+//     let sentenceArray = shuffle(
+//       mdnData.map((object) => {
+//         return object.summary;
+//       })
+//     );
+//     res.status(200).json(sentenceArray);
+//   }
+// });
 
 //FUNCTION TO SHUFFLE ARRAY CONTENTS
 const shuffle = (array) => {
@@ -50,3 +50,18 @@ const shuffle = (array) => {
   }
   return array;
 };
+
+//RETURNS ONE RANDOM SUMMARY
+router.get("/summary", (req, res) => {
+  const mdnData = readFile("./data/mdn.json");
+  if (!mdnData) {
+    res.status(404).json("Nothing found");
+  } else {
+    let summaryArray = mdnData.map((object) => {
+      return object.summary;
+    });
+    let randomSummary =
+      summaryArray[Math.floor(Math.random() * summaryArray.length)];
+    res.status(200).json(randomSummary);
+  }
+});
