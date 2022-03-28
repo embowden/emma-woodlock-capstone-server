@@ -34,6 +34,21 @@ router.post("/summary", (req, res) => {
   }
 });
 
+//RETURN TITLE AND WEBSITE LINK USING ID INFORMATION
+router.post("/links", (req, res) => {
+  const mdnData = readFile("./data/mdn.json");
+  const id = req.body.id;
+  if (!mdnData) {
+    res.status(404).json("Nothing found");
+  } else {
+    const filteredArray = mdnData.filter((item) => id.includes(item.id));
+    const titleAndLink = filteredArray.map((object) => {
+      return { id: object.id, title: object.title, link: object.link };
+    });
+    res.status(200).json(titleAndLink);
+  }
+});
+
 //RETURNS ALL SUMMARY VALUES
 //SHUFFLES THE ORDER OF THE SUMMARY VALUES
 // router.get("/summaries", (req, res) => {
@@ -83,4 +98,3 @@ router.post("/summary", (req, res) => {
 //     res.status(200).json(randomSummary);
 //   }
 // });
-

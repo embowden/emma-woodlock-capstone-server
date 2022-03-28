@@ -19,7 +19,7 @@
   },
   {
     "id": "4",
-    "title": "getter",
+    "title": "Getter",
     "summary": "The get syntax binds an object property to a function that will be called when that property is looked up.",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/get"
   },
