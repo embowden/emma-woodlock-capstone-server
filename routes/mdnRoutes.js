@@ -6,13 +6,31 @@ const fs = require("fs");
 
 module.exports = router;
 
-//RETURNS ALL DATA IN JSON FILE
+// RETURNS ALL DATA IN JSON FILE
+// NOT CURRENTLY IN USE
 router.get("/", (req, res) => {
   const mdnData = readFile("./data/mdn.json");
   if (!mdnData) {
     res.status(404).json("Nothing found");
   } else {
     res.status(200).json(mdnData);
+  }
+});
+
+//RETURNS RANDOM SUMMARY, FILTERS OUT EXISTING ONE EACH TIME
+router.post("/summary", (req, res) => {
+  const mdnData = readFile("./data/mdn.json");
+  const id = req.body.id;
+  if (!mdnData) {
+    res.status(404).json("Nothing found");
+  } else {
+    const filteredArray = mdnData.filter((item) => !id.includes(item.id));
+    const IDandSummary = filteredArray.map((object) => {
+      return { id: object.id, summary: object.summary };
+    });
+    const randomSummary =
+      IDandSummary[Math.floor(Math.random() * IDandSummary.length)];
+    res.status(200).json(randomSummary);
   }
 });
 
@@ -32,36 +50,37 @@ router.get("/", (req, res) => {
 //   }
 // });
 
-//FUNCTION TO SHUFFLE ARRAY CONTENTS
-const shuffle = (array) => {
-  let currentIndex = array.length,
-    randomIndex;
+// //FUNCTION TO SHUFFLE ARRAY CONTENTS
+// const shuffle = (array) => {
+//   let currentIndex = array.length,
+//     randomIndex;
 
-  // WHILE THERE ARE ELEMENTS REMAINING
-  while (currentIndex != 0) {
-    // PICK A REMAINING ELEMENT
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    // SWAP IT WITH CURRENT ELEMENT
-    [array[currentIndex], array[randomIndex]] = [
-      array[randomIndex],
-      array[currentIndex],
-    ];
-  }
-  return array;
-};
+//   // WHILE THERE ARE ELEMENTS REMAINING
+//   while (currentIndex != 0) {
+//     // PICK A REMAINING ELEMENT
+//     randomIndex = Math.floor(Math.random() * currentIndex);
+//     currentIndex--;
+//     // SWAP IT WITH CURRENT ELEMENT
+//     [array[currentIndex], array[randomIndex]] = [
+//       array[randomIndex],
+//       array[currentIndex],
+//     ];
+//   }
+//   return array;
+// };
 
-//RETURNS ONE RANDOM SUMMARY
-router.get("/summary", (req, res) => {
-  const mdnData = readFile("./data/mdn.json");
-  if (!mdnData) {
-    res.status(404).json("Nothing found");
-  } else {
-    let summaryArray = mdnData.map((object) => {
-      return object.summary;
-    });
-    let randomSummary =
-      summaryArray[Math.floor(Math.random() * summaryArray.length)];
-    res.status(200).json(randomSummary);
-  }
-});
+//RETURNS INITIAL RANDOM SUMMARY
+// router.get("/summary", (req, res) => {
+//   const mdnData = readFile("./data/mdn.json");
+//   if (!mdnData) {
+//     res.status(404).json("Nothing found");
+//   } else {
+//     let summaryArray = mdnData.map((object) => {
+//       return { id: object.id, summary: object.summary };
+//     });
+//     let randomSummary =
+//       summaryArray[Math.floor(Math.random() * summaryArray.length)];
+//     res.status(200).json(randomSummary);
+//   }
+// });
+
