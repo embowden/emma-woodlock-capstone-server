@@ -34,6 +34,24 @@ router.post("/summary", (req, res) => {
   }
 });
 
+// RETURNS RANDOM CODELINE, FILTERS OUT EXISTING ONE EACH TIME
+// FOR CODING MODE- NOT CURRENTLY IN USE
+router.post("/code", (req, res) => {
+  const mdnData = readFile("./data/mdn.json");
+  const id = req.body.id;
+  if (!mdnData) {
+    res.status(404).json("Nothing found");
+  } else {
+    const filteredArray = mdnData.filter((item) => !id.includes(item.id));
+    const IDandCode = filteredArray.map((object) => {
+      return { id: object.id, code: object.code };
+    });
+    const randomSummary =
+      IDandCode[Math.floor(Math.random() * IDandCode.length)];
+    res.status(200).json(randomSummary);
+  }
+});
+
 //RETURN TITLE AND WEBSITE LINK USING ID INFORMATION
 router.post("/links", (req, res) => {
   const mdnData = readFile("./data/mdn.json");
