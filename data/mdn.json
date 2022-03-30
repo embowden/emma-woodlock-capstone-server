@@ -1,19 +1,19 @@
 [
   {
     "id": "1",
-    "title": "Function.prototype.call()",
+    "title": ".call()",
     "summary": "The call() method calls a function with a given this value and arguments provided individually.",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function/call"
   },
   {
     "id": "2",
-    "title": "Object.prototype.hasOwnProperty()",
+    "title": ".hasOwnProperty()",
     "summary": "The hasOwnProperty() method returns a boolean indicating whether the object has the specified property as its own property (as opposed to inheriting it).",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/hasOwnProperty"
   },
   {
     "id": "3",
-    "title": "Exponentiation (**)",
+    "title": "Exponentiation",
     "summary": "The exponentiation operator (**) returns the result of raising the first operand to the power of the second operand. It is equivalent to Math.pow, except it also accepts BigInts as operands.",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Exponentiation"
   },
@@ -25,7 +25,7 @@
   },
   {
     "id": "5",
-    "title": "Array.prototype.splice()",
+    "title": ".splice()",
     "summary": "The splice() method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. To access part of an array without modifying it, see slice().",
     "link": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice"
   }
