@@ -10,5 +10,5 @@ app.use(cors());
 app.use("/mdn", mdnRoutes);
 app.use(express.static("public"));
 app.listen(PORT, () => {
-  console.log(`Example app listening at http://localhost:${PORT}`);
+  console.log(`Example app listening at ${PORT}`);
 });
